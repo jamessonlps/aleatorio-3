@@ -53,7 +53,7 @@ export function CarDetails() {
       </Header>
 
       <CarImages>
-        <ImageSlider imagesUrl={[car.photos[0]]} />
+        <ImageSlider imagesUrl={car.photos} />
       </CarImages>
 
       <Content>

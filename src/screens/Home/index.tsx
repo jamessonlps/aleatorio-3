@@ -17,15 +17,23 @@ import {
   TotalCars,
   HeaderContent,
   CarList,
+  MyCarsButton,
 } from "./styles";
+import { useTheme } from "styled-components/native";
 
 export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
   const navigation = useNavigation<AppNavigatorRoutesProps>();
 
+  const theme = useTheme();
+
   function handleCarDetails(car: CarDTO) {
     navigation.navigate("CarDetails", { car });
+  }
+
+  function handleOpenMyCars() {
+    navigation.navigate("MyCars");
   }
 
   async function fetchCars() {
@@ -74,6 +82,14 @@ export function Home() {
           keyExtractor={item => item.id}
         />
       )}
+
+      <MyCarsButton onPress={handleOpenMyCars}>
+        <Ionicons
+          name="ios-car-sport"
+          size={32}
+          color={theme.colors.shape}
+        />
+      </MyCarsButton>
 
     </Container>
   )
