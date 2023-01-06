@@ -8,6 +8,7 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { SchedulingComplete } from "../screens/SchedulingComplete";
 import { CarDTO } from "../interfaces/CarDTO";
 import { MyCars } from "../screens/MyCars";
+import { Splash } from "../screens/Splash";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -25,10 +26,20 @@ export type AppNavigatorRoutesProps = NativeStackNavigationProp<StackRoutes>;
 
 export function StackRoutes() {
   return (
-    <Navigator screenOptions={{ headerShown: false }}>
+    <Navigator
+      initialRouteName="Splash"
+      screenOptions={{ headerShown: false }}
+    >
+      <Screen
+        name="Splash"
+        component={Splash}
+      />
       <Screen
         name="Home"
         component={Home}
+        options={{
+          gestureEnabled: false,
+        }}
       />
       <Screen
         name="CarDetails"
