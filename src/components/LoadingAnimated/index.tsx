@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import LottieView from "lottie-react-native";
 
-import LoadingCar from "../../assets/Vehiculo.json";
+import LoadingCar from "../../assets/loading_car.json";
 
 import { Container } from "./styles";
 
