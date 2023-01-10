@@ -9,7 +9,7 @@ export const Container = styled.View`
   flex-direction: row;
   width: 100%;
 
-  
+  margin-bottom: 8px;
 `
 
 export const IconContainer = styled.View<Props>`
