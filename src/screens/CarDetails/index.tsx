@@ -23,7 +23,7 @@ import {
 } from "./styles";
 import { Button } from "../../components/Button";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
 import { CarDTO } from "../../interfaces/CarDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 import { getStatusBarHeight } from "react-native-iphone-x-helper";
@@ -119,8 +119,8 @@ export function CarDetails() {
           </Description>
 
           <Rent>
-            <Period>{car.rent.period}</Period>
-            <Price>R$ {car.rent.price}</Price>
+            <Period>{car.period}</Period>
+            <Price>R$ {car.price}</Price>
           </Rent>
         </Details>
 

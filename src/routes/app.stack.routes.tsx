@@ -6,50 +6,33 @@ import { CarDetails } from "../screens/CarDetails";
 import { Scheduling } from "../screens/Scheduling";
 import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { CarDTO } from "../interfaces/CarDTO";
-import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
-import { SignIn } from "../screens/SignIn";
-import { SignUpFirstStep } from "../screens/SignUp/SignUpFirstStep";
-import { SignUpSecondStep } from "../screens/SignUp/SignUpSecondStep";
-
-const { Navigator, Screen } = createNativeStackNavigator();
+import { Confirmation } from "../screens/Confirmation";
 
 
 export type RootStackParamList = {
   Home: undefined;
+  Splash: undefined;
   CarDetails: { car: CarDTO };
   Scheduling: { car: CarDTO };
   SchedulingDetails: { car: CarDTO, dates: string[] };
-  Confirmation: { title: string; message: string; nextScreenRoute: string; };
-  MyCars: undefined;
-  SignIn: undefined;
-  SignUpFirstStep: undefined;
-  SignUpSecondStep: { user: { name: string, email: string, driverLicense: string } };
+  Confirmation: { title: string; message: string; nextScreenRoute: any; };
 }
 
 export type AppNavigatorRoutesProps = NativeStackNavigationProp<RootStackParamList>;
 
-export function StackRoutes() {
+
+const { Navigator, Screen } = createNativeStackNavigator<RootStackParamList>();
+
+export function AppStackRoutes() {
   return (
     <Navigator
-      initialRouteName="SignIn"
+      initialRouteName="Splash"
       screenOptions={{ headerShown: false }}
     >
-      {/* <Screen
+      <Screen
         name="Splash"
         component={Splash}
-      /> */}
-      <Screen
-        name="SignIn"
-        component={SignIn}
-      />
-      <Screen
-        name="SignUpFirstStep"
-        component={SignUpFirstStep}
-      />
-      <Screen
-        name="SignUpSecondStep"
-        component={SignUpSecondStep}
       />
       <Screen
         name="Home"
@@ -70,13 +53,9 @@ export function StackRoutes() {
         name="SchedulingDetails"
         component={SchedulingDetails}
       />
-      {/* <Screen
-        name="SchedulingComplete"
-        component={SchedulingComplete}
-      /> */}
       <Screen
-        name="MyCars"
-        component={MyCars}
+        name="Confirmation"
+        component={Confirmation}
       />
 
     </Navigator>

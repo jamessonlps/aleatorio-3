@@ -34,7 +34,7 @@ import { Button } from "../../components/Button";
 import { useTheme } from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
 import { CarDTO } from "../../interfaces/CarDTO";
 import { getAccessoryIcon } from "../../utils/getAccessoryIcon";
 import { format, parseISO } from "date-fns";
@@ -86,7 +86,11 @@ export function SchedulingDetails() {
       id: car.id,
       unavailable_dates
     })
-      .then(() => navigation.navigate("SchedulingComplete"))
+      .then(() => navigation.navigate("Confirmation", {
+        message: `Agora você só precisa ir\naté a concessionária da RENTX\npegar o seu automóvel.`,
+        nextScreenRoute: "Home",
+        title: "Carro alugado!"
+      }))
       .catch(() => {
         setLoading(false);
         Alert.alert("Não foi possível confirmar o agendamento.")

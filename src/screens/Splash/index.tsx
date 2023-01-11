@@ -11,7 +11,7 @@ import Animated, {
 
 import BrandSvg from "../../assets/brand.svg";
 import LogoSvg from "../../assets/logo.svg";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
 import { Container } from "./styles";
 
 
@@ -59,7 +59,7 @@ export function Splash() {
   })
 
   function startApp() {
-    navigation.navigate("Home");
+    navigation.navigate("SignIn");
   }
 
   useEffect(() => {

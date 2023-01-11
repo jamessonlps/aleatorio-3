@@ -7,7 +7,7 @@ import { AntDesign } from "@expo/vector-icons";
 import { BackButton } from "../../components/BackButton";
 import { Car } from "../../components/Car";
 import { CarDTO } from "../../interfaces/CarDTO";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
 import { api } from "../../services/api";
 
 import {

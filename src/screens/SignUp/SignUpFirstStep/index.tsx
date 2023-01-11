@@ -17,7 +17,7 @@ import { Bullet } from "../../../components/Bullet";
 import { Input } from "../../../components/Input";
 import { Button } from "../../../components/Button";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
-import { AppNavigatorRoutesProps } from "../../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../../routes/app.stack.routes";
 
 export function SignUpFirstStep() {
   const [name, setName] = useState("");

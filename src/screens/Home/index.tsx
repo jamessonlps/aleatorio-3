@@ -1,27 +1,12 @@
 import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { BackHandler, StatusBar, StyleSheet } from "react-native";
+import { StatusBar } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
-import { Ionicons } from "@expo/vector-icons";
-import { useTheme } from "styled-components/native";
-
-import Animated, {
-  useAnimatedGestureHandler,
-  useAnimatedStyle,
-  useSharedValue,
-  withSpring
-} from "react-native-reanimated";
-
-import {
-  PanGestureHandler,
-  RectButton
-} from "react-native-gesture-handler";
 
 import Logo from "../../assets/logo.svg";
 import { Car } from "../../components/Car";
-import { Loading } from "../../components/Loading";
 import { CarDTO } from "../../interfaces/CarDTO";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
 import { api } from "../../services/api";
 
 import {
@@ -30,53 +15,51 @@ import {
   TotalCars,
   HeaderContent,
   CarList,
-  MyCarsButton,
 } from "./styles";
 import { LoadingAnimated } from "../../components/LoadingAnimated";
 
 
-const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
+// const ButtonAnimated = Animated.createAnimatedComponent(RectButton);
 
 export function Home() {
   const [cars, setCars] = useState<CarDTO[]>([]);
   const [loading, setLoading] = useState(true);
 
   const navigation = useNavigation<AppNavigatorRoutesProps>();
-  const theme = useTheme();
 
-  const positionY = useSharedValue(0);
-  const positionX = useSharedValue(0);
+  // const positionY = useSharedValue(0);
+  // const positionX = useSharedValue(0);
 
-  const myCarsButtonStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { translateX: positionX.value },
-        { translateY: positionY.value },
-      ]
-    }
-  });
+  // const myCarsButtonStyle = useAnimatedStyle(() => {
+  //   return {
+  //     transform: [
+  //       { translateX: positionX.value },
+  //       { translateY: positionY.value },
+  //     ]
+  //   }
+  // });
 
-  const onGestureEvent = useAnimatedGestureHandler({
-    onStart(event, ctx: any) {
-      ctx.positionX = positionX.value
-      ctx.positionY = positionY.value
-    },
-    onActive(event, ctx: any) {
-      positionX.value = event.translationX + ctx.positionX
-      positionY.value = event.translationY + ctx.positionY
-    },
-    onEnd() {
+  // const onGestureEvent = useAnimatedGestureHandler({
+  //   onStart(event, ctx: any) {
+  //     ctx.positionX = positionX.value
+  //     ctx.positionY = positionY.value
+  //   },
+  //   onActive(event, ctx: any) {
+  //     positionX.value = event.translationX + ctx.positionX
+  //     positionY.value = event.translationY + ctx.positionY
+  //   },
+  //   onEnd() {
 
-    },
-  })
+  //   },
+  // })
 
   function handleCarDetails(car: CarDTO) {
     navigation.navigate("CarDetails", { car });
   }
 
-  function handleOpenMyCars() {
-    navigation.navigate("MyCars");
-  }
+  // function handleOpenMyCars() {
+  //   navigation.navigate("MyCars");
+  // }
 
   async function fetchCars() {
     try {
@@ -93,19 +76,6 @@ export function Home() {
     fetchCars();
   }, []);
 
-  // useEffect(() => {
-  //   BackHandler.addEventListener("hardwareBackPress", () => {
-  //     return true;
-  //   })
-  // }, [])
-
-  useFocusEffect(() => {
-    const backHandler = BackHandler.addEventListener(
-      'hardwareBackPress',
-      () => true
-    );
-    return () => backHandler.remove();
-  });
 
   return (
     <Container>
@@ -141,7 +111,7 @@ export function Home() {
         />
       )}
 
-      <PanGestureHandler onGestureEvent={onGestureEvent} >
+      {/* <PanGestureHandler onGestureEvent={onGestureEvent} >
         <Animated.View
           style={[
             myCarsButtonStyle,
@@ -163,18 +133,18 @@ export function Home() {
             />
           </ButtonAnimated>
         </Animated.View>
-      </PanGestureHandler>
+      </PanGestureHandler> */}
 
     </Container>
   )
 }
 
-const styles = StyleSheet.create({
-  button: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    justifyContent: "center",
-    alignItems: "center",
-  }
-})
+// const styles = StyleSheet.create({
+//   button: {
+//     width: 60,
+//     height: 60,
+//     borderRadius: 30,
+//     justifyContent: "center",
+//     alignItems: "center",
+//   }
+// })

@@ -12,28 +12,26 @@ import {
 import LogoSvg from "../../assets/logo_background_gray.svg";
 import DoneSvg from "../../assets/done.svg";
 import { ConfirmButton } from "../../components/ConfirmButton";
-import { AppNavigatorRoutesProps, RootStackParamList } from "../../routes/stack.routes";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { AppNavigatorRoutesProps, RootStackParamList } from "../../routes/app.stack.routes";
+import { NativeStackNavigationProp, NativeStackScreenProps } from "@react-navigation/native-stack";
 
 
-interface Params {
-  title: string;
-  message: string;
-  nextScreenRoute: keyof RootStackParamList;
-}
-
-type ConfirmationScreenProp = NativeStackNavigationProp<
+type ConfirmationScreenProp = NativeStackScreenProps<
   RootStackParamList,
   "Confirmation"
 >;
 
+type ConfirmationScreenRouteProp = ConfirmationScreenProp["route"]
+
+type ConfirmationScreenNavigationProp = ConfirmationScreenProp["navigation"]
+
 
 export function Confirmation() {
   const { width } = useWindowDimensions();
-  const route = useRoute();
-  const navigation = useNavigation<ConfirmationScreenProp>();
+  const route = useRoute<ConfirmationScreenRouteProp>();
+  const navigation = useNavigation<ConfirmationScreenNavigationProp>();
 
-  const { title, message, nextScreenRoute } = route.params as Params;
+  const { title, message, nextScreenRoute } = route.params;
 
   function handleConfirm() {
     navigation.navigate(nextScreenRoute);
@@ -50,14 +48,7 @@ export function Confirmation() {
 
       <Content>
         <DoneSvg width={80} height={80} />
-        <Title>Carro alugado!</Title>
         <Title>{title}</Title>
-
-        <Message>
-          Agora você só precisa ir {"\n"}
-          até a concessionária da RENTX {"\n"}
-          pegar o seu automóvel
-        </Message>
         <Message>{message}</Message>
       </Content>
 

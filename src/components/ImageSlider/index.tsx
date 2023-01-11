@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { FlatList, ViewToken } from "react-native";
+import { PhotoDTO } from "../../interfaces/CarDTO";
 
 import {
   Container,
@@ -11,7 +12,7 @@ import {
 
 
 interface Props {
-  imagesUrl: string[];
+  imagesUrl: PhotoDTO[];
 }
 
 interface ChangeImageProps {
@@ -30,9 +31,9 @@ export function ImageSlider({ imagesUrl }: Props) {
   return (
     <Container>
       <ImageIndexes>
-        {imagesUrl.map((_, index) => (
+        {imagesUrl.map((item, index) => (
           <ImageIndex
-            key={String(index)}
+            key={String(item.id)}
             active={index === imageIndex}
           />
         ))}
@@ -40,14 +41,14 @@ export function ImageSlider({ imagesUrl }: Props) {
 
       <FlatList
         data={imagesUrl}
-        keyExtractor={key => key}
+        keyExtractor={item => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         onViewableItemsChanged={indexChange.current}
         renderItem={({ item }) => (
           <CarImageWrapper>
             <CarImage
-              source={{ uri: item }}
+              source={{ uri: item.photo }}
               resizeMode="contain"
             />
           </CarImageWrapper>

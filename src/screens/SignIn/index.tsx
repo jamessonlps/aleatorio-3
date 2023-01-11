@@ -13,7 +13,10 @@ import * as Yup from "yup";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/InputPassword";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { useAuth } from "../../hooks/auth";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
+import { AppTabNavigatorRoutesProps } from "../../routes/app.tab.routes";
+import { AuthNavigatorRoutesProps } from "../../routes/auth.routes";
 
 import {
   Container,
@@ -29,7 +32,10 @@ export function SignIn() {
   const [password, setPassword] = useState("");
 
   const theme = useTheme();
-  const navigation = useNavigation<AppNavigatorRoutesProps>()
+  const { signIn } = useAuth();
+
+  const appNavigation = useNavigation<AppTabNavigatorRoutesProps>()
+  const authNavigation = useNavigation<AuthNavigatorRoutesProps>()
 
   async function handleSignIn() {
     try {
@@ -44,7 +50,14 @@ export function SignIn() {
       })
 
       await schema.validate({ email, password })
-      Alert.alert("Correto!")
+
+      signIn({ email, password })
+        .then(() => {
+          appNavigation.navigate("HomeStack")
+        })
+        .catch(() => {
+          Alert.alert("Error");
+        })
     } catch (error) {
       if (error instanceof Yup.ValidationError) {
         return Alert.alert("haha", error.message)
@@ -54,7 +67,7 @@ export function SignIn() {
   }
 
   function handleNewAccount() {
-    navigation.navigate("SignUpFirstStep");
+    authNavigation.navigate("SignUpFirstStep");
   }
 
   return (

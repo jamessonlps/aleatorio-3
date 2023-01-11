@@ -19,7 +19,7 @@ import { StatusBar } from "react-native";
 import { Button } from "../../components/Button";
 import { Calendar, DayProps } from "../../components/Calendar";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { AppNavigatorRoutesProps } from "../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../routes/app.stack.routes";
 import { generateInterval } from "./generateInterval";
 
 import { MarkedDates } from "react-native-calendars/src/types";

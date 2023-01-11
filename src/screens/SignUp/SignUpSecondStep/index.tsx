@@ -17,7 +17,8 @@ import { Bullet } from "../../../components/Bullet";
 import { Button } from "../../../components/Button";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 import { PasswordInput } from "../../../components/InputPassword";
-import { AppNavigatorRoutesProps } from "../../../routes/stack.routes";
+import { AppNavigatorRoutesProps } from "../../../routes/app.stack.routes";
+import { api } from "../../../services/api";
 
 interface Params {
   user: {
@@ -41,7 +42,7 @@ export function SignUpSecondStep() {
     navigation.goBack();
   }
 
-  function handleRegister() {
+  async function handleRegister() {
     if (!password || !confirmPassword) {
       return Alert.alert("Erro", "Senha e a confirmação da senha são obrigatórias");
     }
@@ -49,6 +50,24 @@ export function SignUpSecondStep() {
     if (password !== confirmPassword) {
       return Alert.alert("Erro", "As senhas não coincidem")
     }
+
+    await api.post("/users", {
+      name: user.name,
+      email: user.email,
+      driver_license: user.driverLicense,
+      password,
+    })
+      .then(() => {
+        navigation.navigate("Confirmation", {
+          nextScreenRoute: "SignIn",
+          message: `Agora é só fazer login\ne aproveitar`,
+          title: "Conta criada!"
+        })
+      })
+      .catch(() => {
+        Alert.alert("Erro", "Não foi possível completar o seu cadastro")
+      })
+
   }
 
   return (
